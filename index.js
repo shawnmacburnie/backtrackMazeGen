@@ -22,6 +22,7 @@ function draw() {
     if (maze.done) return;
     ctx.clearRect(0, 0, width, height);
     maze.draw(ctx);
+    maze.currentCell.highlight(ctx);
     maze.nextLoop();
     if (maze.done) console.log('done');
     requestAnimationFrame(draw);

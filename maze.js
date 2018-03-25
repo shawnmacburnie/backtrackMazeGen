@@ -30,7 +30,6 @@ class Maze {
         for (var i = 0; i < grid.length; i++) {
             grid[i].draw(ctx);
         }
-        if (showDebug) currentCell.highlight(ctx);
     }
 
     //Generate entire maze in one loop
