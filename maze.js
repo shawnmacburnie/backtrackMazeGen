@@ -1,5 +1,7 @@
+// Maze algorithm using  Recursive backtracker
+// https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker
 class Maze {
-    constructor(cols, rows, type = 'backtrack') {
+    constructor(cols, rows) {
         let grid = [];
 
         for (let col = 0; col < cols; col++) {
@@ -11,17 +13,18 @@ class Maze {
         this.currentCell = grid[0];
         this.currentCell.visited = true;
         this.previousMoves = [];
-        this.type = type;
         this.grid = grid;
         this.cols = cols;
         this.rows = rows;
         this.iteration = 0;
     }
 
+    // dynamic property to tell if maze is done 
     get done() {
         return !this.previousMoves.length && this.iteration > 0;
     }
 
+    // draw all the cells
     draw(ctx) {
         let { grid, currentCell } = this;
         for (var i = 0; i < grid.length; i++) {
@@ -29,13 +32,17 @@ class Maze {
         }
         if (showDebug) currentCell.highlight(ctx);
     }
+
+    //Generate entire maze in one loop
     generate() {
         while(!this.done) {
             this.nextLoop();
         }
     }
-    nextLoopBackTract() {
-        let nextCell = this.currentCell.checkNeighbors(this.grid);
+
+    // Each iteration of the backtrack algorithm
+    nextLoop() {
+        let nextCell = this.currentCell.getNextNeighbors(this.grid);
         this.iteration++;
         if (nextCell) {
             this.previousMoves.push(this.currentCell);
@@ -46,9 +53,5 @@ class Maze {
             //Need to backtrack
             this.currentCell = this.previousMoves.pop();
         }
-    }
-
-    nextLoop() {
-        if (this.type == 'backtrack') this.nextLoopBackTract();
     }
 }

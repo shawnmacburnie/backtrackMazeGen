@@ -1,3 +1,4 @@
+// Each cell of the maze
 class Cell {
     constructor(col, row, size) {
         this.size = size;
@@ -11,6 +12,7 @@ class Cell {
         };
         this.visited = false;
     }
+    //gets an index in 1d array using 2d col row data
     static getIndex(col, row) {
         if (col < 0 || row < 0 || col >= cols || row >= rows) {
             return -1;
@@ -18,6 +20,7 @@ class Cell {
         return col + row * cols;
     }
 
+    //Remove the walls where connected to neighbor cell
     removeWall(neighbor) {
         let x = this.col - neighbor.col;
         let y = this.row - neighbor.row;
@@ -35,6 +38,8 @@ class Cell {
             neighbor.walls.top = false;
         }
     }
+
+    //Draws a highlight on the cell
     highlight(ctx) {
         let { col, row, size, walls } = this;
         let x = col * size;
@@ -47,7 +52,8 @@ class Cell {
 
     }
 
-    checkNeighbors(grid) {
+    // gets the next random neighbor who hasn't been visited
+    getNextNeighbors(grid) {
         let { row, col } = this;
         let neighbors = [];
 
@@ -66,7 +72,7 @@ class Cell {
         }
     }
 
-
+    // Draw the walls around cell
     draw(ctx) {
         let { col, row, size, walls } = this;
         let x = col * size;
