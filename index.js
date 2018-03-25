@@ -28,8 +28,8 @@ function draw() {
     requestAnimationFrame(draw);
 }
 
+// ------------------------- Show maze with no animation -------------------------
 
-// Show maze with no animation
 let instantMazeCanvas = document.createElement('canvas');
 let instantMazeCtx = instantMazeCanvas.getContext('2d');
 let instantTitle = document.createElement('h1');

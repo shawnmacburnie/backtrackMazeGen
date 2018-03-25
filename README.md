@@ -1,0 +1,1 @@
+Javascript OOP style  backtrack maze generator following the pseudocode found https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker
